@@ -383,10 +383,13 @@ export type FormFieldOption = {
 export type FormField = {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'password' | 'number' | 'select';
+  type: 'text' | 'email' | 'password' | 'number' | 'select' | 'date';
   placeholder?: string;
   required?: boolean;
-  options?: FormFieldOption[]; // <-- only for select fields
+  // Only for select fields
+  options?: FormFieldOption[];
+  multiple?: boolean; // true if multi-select
+
 };
 
 

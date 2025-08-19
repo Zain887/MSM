@@ -26,7 +26,7 @@ const ReusableForm = <T extends Record<string, any>>({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="bg-white p-8 rounded-lg shadow-md max-w-md mx-auto space-y-6"
+      className="bg-white p-8 rounded-lg shadow-md w-full mx-auto space-y-6"
     >
       {fields.map((field) => {
         const fieldName = field.name as Path<T>;
@@ -38,9 +38,8 @@ const ReusableForm = <T extends Record<string, any>>({
             {field.type === "select" && field.options ? (
               <select
                 {...register(fieldName, { required: field.required })}
-                className={`px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 ${
-                  errors[fieldName] ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 ${errors[fieldName] ? "border-red-500" : "border-gray-300"
+                  }`}
               >
                 <option value="">Select {field.label}</option>
                 {field.options.map((opt) => (
@@ -54,9 +53,8 @@ const ReusableForm = <T extends Record<string, any>>({
                 type={field.type}
                 placeholder={field.placeholder}
                 {...register(fieldName, { required: field.required })}
-                className={`px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 ${
-                  errors[fieldName] ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 ${errors[fieldName] ? "border-red-500" : "border-gray-300"
+                  }`}
               />
             )}
 

@@ -1,6 +1,5 @@
 /* --------- COMMON TYPES --------- */
 export type ISODateString = string;
-
 export type PaymentMethod = 'cash' | 'bank transfer' | 'online' | 'other';
 export type AttendanceStatus = 'present' | 'absent' | 'late' | 'excused';
 export type GradingSystem = 'percentage' | 'GPA' | 'letter';

@@ -5,6 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SuperAdminModule } from './superadmin/superadmin.module';
 import { SchoolModule } from './schools/schools.module';
+import { StudentModule } from './student/student.module';
+import { ParentModule } from './parent/parent.module';
+import { ClassModule } from './class/class.module';
+import { TeacherModule } from './teacher/teacher.module';
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -24,6 +29,11 @@ import { SchoolModule } from './schools/schools.module';
     }),
     SuperAdminModule,
     SchoolModule,
+    StudentModule,
+    ParentModule,
+    ClassModule,
+    TeacherModule,
+    SubjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
