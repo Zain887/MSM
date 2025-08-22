@@ -1,29 +1,72 @@
-import { IsNotEmpty, IsOptional, IsString, IsEmail, IsUUID } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, IsUrl, IsInt } from 'class-validator';
 
 export class CreateSchoolDto {
-  @ApiProperty({ description: 'Name of the school', example: 'Greenwood High' })
+  @ApiProperty({ example: 'Springfield High School' })
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @ApiPropertyOptional({ description: 'Address of the school', example: '123 Main St, Springfield' })
-  @IsOptional()
+  @ApiProperty({ example: 'SCH-2025-001' })
   @IsString()
-  address?: string;
+  @IsNotEmpty()
+  registrationNumber: string;
 
-  @ApiPropertyOptional({ description: 'Contact email of the school', example: 'admin@admin.com'})
+  @ApiProperty({ enum: ['public', 'private', 'international'] })
+  @IsEnum(['public', 'private', 'international'])
+  type: 'public' | 'private' | 'international';
+
+  @ApiProperty({ example: '123 Main St' })
+  @IsString()
+  address: string;
+
+  @ApiProperty({ example: 'Lahore' })
+  @IsString()
+  city: string;
+
+  @ApiProperty({ example: 'Punjab' })
+  @IsString()
+  state: string;
+
+  @ApiProperty({ example: 'Pakistan' })
+  @IsString()
+  country: string;
+
+  @ApiProperty({ example: '54000' })
+  @IsString()
+  postalCode: string;
+
+  @ApiProperty({ required: false, example: 'school@example.com' })
   @IsOptional()
   @IsEmail()
   contactEmail?: string;
 
-  @ApiPropertyOptional({ description: 'Contact phone number of the school', example: '+1234567890' })
+  @ApiProperty({ required: false, example: '+92-300-1234567' })
   @IsOptional()
   @IsString()
   contactPhone?: string;
 
-  @ApiProperty({ description: 'ID of the Super Admin this school belongs to', example: 'uuid-of-superadmin' })
-  @IsUUID()
-  @IsNotEmpty()
-  superAdminId: string;
+  @ApiProperty({ required: false, example: 'https://school.edu' })
+  @IsOptional()
+  @IsUrl()
+  websiteUrl?: string;
+
+  @ApiProperty({ required: false, example: 'https://placehold.co/200x200?text=Logo'})
+  @IsOptional()
+  @IsUrl()
+  logoUrl?: string;
+
+  @ApiProperty({ required: false, example: 1995 })
+  @IsOptional()
+  @IsInt()
+  establishedYear?: number;
+
+  @ApiProperty({ required: false, example: { gradingSystem: 'GPA', currency: 'PKR' } })
+  @IsOptional()
+  settings?: Record<string, any>;
+
+  @ApiProperty({ required: false, enum: ['active', 'inactive'], default: 'active' })
+  @IsOptional()
+  @IsEnum(['active', 'inactive'])
+  status?: 'active' | 'inactive';
 }
