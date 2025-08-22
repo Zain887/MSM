@@ -184,7 +184,7 @@ export default function SchoolListPage() {
                                         {school.status}
                                     </span>
                                 </td>
-                                <td className="p-3 flex justify-center items-center gap-3">
+                                <td className="p-3 flex justify-evenly h-16">
                                     <button
                                         onClick={() => handleUpdate(school)}
                                         className="text-blue-600 hover:text-blue-800 transition"

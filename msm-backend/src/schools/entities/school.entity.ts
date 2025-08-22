@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('schools')
 export class School {
@@ -49,4 +49,5 @@ export class School {
 
   @Column({ default: 'active' })
   status: 'active' | 'inactive';
+
 }

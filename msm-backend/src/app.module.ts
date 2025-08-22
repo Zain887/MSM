@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SchoolModule } from './schools/schools.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

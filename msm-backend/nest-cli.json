@@ -7,5 +7,25 @@
   },
   "generate": {
     "spec": false
+  },
+  "schematics": {
+    "@nestjs/schematics:module": {
+      "spec": false
+    },
+    "@nestjs/schematics:controller": {
+      "spec": false
+    },
+    "@nestjs/schematics:service": {
+      "spec": false
+    },
+    "@nestjs/schematics:resolver": {
+      "spec": false
+    },
+    "@nestjs/schematics:gateway": {
+      "spec": false
+    },
+    "@nestjs/schematics:class": {
+      "spec": false
+    }
   }
 }
