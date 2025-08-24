@@ -65,38 +65,39 @@ export default function SchoolListPage() {
     };
 
 
-    const handleSave = async (formData: Record<string, any>) => {
+    const handleSave = async (formData: any) => {
         try {
-            // 🛠 Remove id (backend forbids it in body)
-            delete formData.id;
+            const payload = { ...formData };
 
-            // Convert numeric fields
-            if (formData.establishedYear) {
-                formData.establishedYear = Number(formData.establishedYear);
+            // 🔹 Remove auto-managed fields
+            delete payload.id;
+            delete payload.createdAt;
+            delete payload.updatedAt;
+
+            if (payload.establishedYear) {
+                payload.establishedYear = Number(payload.establishedYear);
             }
 
-            // Handle logo file (optional, if file upload is separate)
-            if (formData.logoUrl instanceof File) {
-                delete formData.logoUrl; // or upload to storage & replace with URL
+            if (payload.logoUrl instanceof File) {
+                delete payload.logoUrl;
             }
 
-            // Debug payload
-            console.log("Submitting payload:", formData);
+            console.log("Submitting payload:", payload);
 
             if (selectedSchool) {
-                // Update
-                await api.put(`/schools/${selectedSchool.id}`, formData);
+                await api.put(`/schools/${selectedSchool.id}`, payload);
             } else {
-                // Create
-                await api.post(`/schools`, formData);
+                await api.post("/schools", payload);
             }
 
             fetchSchools();
-            setIsModalOpen(false);
+            setIsModalOpen(false); // ✅ close modal
         } catch (error: any) {
-            console.error("Save failed:", error.response?.data || error.message);
+            console.error("❌ Save failed:", error.response?.data || error.message);
         }
     };
+
+
 
 
     if (loading) return <p className="p-4">Loading schools...</p>;
