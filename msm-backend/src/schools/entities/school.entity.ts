@@ -1,18 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { IsUUID } from "class-validator";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity('schools')
+// =========================
+// 📌 School
+// =========================
+
+@Entity("schools")
 export class School {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
+  @IsUUID()
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
 
-  @Column({ unique: true })
+  @Column()
   registrationNumber: string;
 
-  @Column({ type: 'enum', enum: ['public', 'private', 'international'] })
-  type: 'public' | 'private' | 'international';
+  @Column({ type: "enum", enum: ["public", "private", "international"] })
+  type: string;
 
   @Column()
   address: string;
@@ -29,10 +45,10 @@ export class School {
   @Column()
   postalCode: string;
 
-  @Column({ nullable: true })
+  @Column()
   contactEmail: string;
 
-  @Column({ nullable: true })
+  @Column()
   contactPhone: string;
 
   @Column({ nullable: true })
@@ -41,13 +57,18 @@ export class School {
   @Column({ nullable: true })
   logoUrl: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: "int", nullable: true })
   establishedYear: number;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: "jsonb", nullable: true })
   settings: Record<string, any>;
 
-  @Column({ default: 'active' })
-  status: 'active' | 'inactive';
+  @Column({ type: "enum", enum: ["active", "inactive"], default: "active" })
+  status: string;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
