@@ -4,6 +4,7 @@
 
 import { IsUUID } from "class-validator";
 import { School } from "src/schools/entities/school.entity";
+import { Student } from "src/students/entities/student.entity";
 import { Teacher } from "src/teachers/entities/teacher.entity";
 import {
     Entity,
@@ -14,6 +15,7 @@ import {
     JoinTable,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
 } from "typeorm";
 
 @Entity("classes")
@@ -28,6 +30,9 @@ export class Class {
     @ManyToMany(() => Teacher, (teacher) => teacher.classes, { nullable: true })
     @JoinTable()
     teachers: Teacher[];
+
+    @OneToMany(() => Student, (student) => student.class)
+    students: Student[];
 
     @Column()
     name: string;

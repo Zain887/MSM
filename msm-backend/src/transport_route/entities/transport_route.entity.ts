@@ -4,6 +4,7 @@
 
 import { IsUUID } from "class-validator";
 import { School } from "src/schools/entities/school.entity";
+import { Student } from "src/students/entities/student.entity";
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -11,6 +12,7 @@ import {
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
 } from "typeorm";
 
 @Entity("transport_routes")
@@ -21,6 +23,10 @@ export class TransportRoute {
 
     @ManyToOne(() => School, (school) => school.transportRoutes, { onDelete: "CASCADE" })
     school: School;
+
+    @OneToMany(() => Student, (student) => student.transportRoute)
+    students: Student[];
+
 
     @Column()
     routeName: string;

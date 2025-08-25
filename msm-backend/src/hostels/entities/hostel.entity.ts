@@ -4,6 +4,7 @@
 
 import { IsUUID } from "class-validator";
 import { School } from "src/schools/entities/school.entity";
+import { Student } from "src/students/entities/student.entity";
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -11,6 +12,7 @@ import {
     ManyToOne,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
 } from "typeorm";
 
 @Entity("hostels")
@@ -21,6 +23,9 @@ export class Hostel {
 
     @ManyToOne(() => School, (school) => school.hostels, { onDelete: "CASCADE" })
     school: School;
+
+    @OneToMany(() => Student, (student) => student.hostel)
+    students: Student[];
 
     @Column()
     name: string;
