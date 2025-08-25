@@ -9,9 +9,6 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
@@ -23,7 +20,7 @@ export class Exam {
     @IsUUID()
     id: string;
 
-    @ManyToOne(() => School)
+    @ManyToOne(() => School, (school) => school.exams, { onDelete: "CASCADE" })
     school: School;
 
     @Column()
@@ -52,4 +49,12 @@ export class Exam {
 
     @Column({ type: "int" })
     passingMarks: number;
+
+    // Timestamps 
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

@@ -9,9 +9,6 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
@@ -19,10 +16,10 @@ import {
 @Entity("fees")
 export class Fee {
     @PrimaryGeneratedColumn("uuid")
-    @IsUUID()   
+    @IsUUID()
     id: string;
 
-    @ManyToOne(() => School)
+    @ManyToOne(() => School, (school) => school.fees, { onDelete: "CASCADE" })
     school: School;
 
     @Column()
@@ -45,4 +42,12 @@ export class Fee {
 
     @Column({ type: "enum", enum: ["unpaid", "partial", "paid"], default: "unpaid" })
     status: string;
+
+    // Timestamps 
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

@@ -3,13 +3,13 @@
 // =========================
 
 import { IsUUID } from "class-validator";
+import { Class } from "src/classes/entities/class.entity";
 import { School } from "src/schools/entities/school.entity";
 import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
-    OneToMany,
     ManyToMany,
     JoinTable,
     CreateDateColumn,
@@ -22,8 +22,12 @@ export class Teacher {
     @IsUUID()
     id: string;
 
-    @ManyToOne(() => School)
+    @ManyToOne(() => School, (school) => school.teachers, { onDelete: 'CASCADE' })
     school: School;
+
+    @ManyToMany(() => Class, (cls) => cls.teachers, { nullable: true })
+    @JoinTable()
+    classes: Class[];
 
     @Column()
     employeeCode: string;
@@ -78,4 +82,10 @@ export class Teacher {
 
     @Column({ type: "enum", enum: ["active", "inactive"], default: "active" })
     status: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

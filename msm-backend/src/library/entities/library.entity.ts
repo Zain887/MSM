@@ -9,9 +9,6 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
@@ -22,7 +19,7 @@ export class LibraryBook {
     @IsUUID()
     id: string;
 
-    @ManyToOne(() => School)
+    @ManyToOne(() => School, (school) => school.id, { onDelete: "CASCADE" })
     school: School;
 
     @Column()
@@ -42,4 +39,12 @@ export class LibraryBook {
 
     @Column({ type: "int", default: 0 })
     available: number;
+
+    // Timestamps 
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

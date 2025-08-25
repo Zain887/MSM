@@ -31,7 +31,6 @@ export class CreateClassDto {
         required: false,
     })
     @IsOptional()
-    @IsUUID()
     classTeacherId?: string;
 
     @ApiProperty({

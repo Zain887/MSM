@@ -2,7 +2,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsUUID, IsString, IsInt, Min } from "class-validator";
 
-export class CreateLibraryDto {
+export class CreateLibraryBookDto {
     @ApiProperty({
         description: "UUID of the school this book belongs to",
         example: "a1b2c3d4-5678-90ab-cdef-1234567890ab",

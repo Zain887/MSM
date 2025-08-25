@@ -5,15 +5,12 @@
 import { IsUUID } from "class-validator";
 import { School } from "src/schools/entities/school.entity";
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    ManyToOne,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
-    CreateDateColumn,
-    UpdateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @Entity("attendance")
@@ -22,7 +19,7 @@ export class Attendance {
   @IsUUID()
   id: string;
 
-  @ManyToOne(() => School)
+  @ManyToOne(() => School, (school) => school.attendance, { onDelete: "CASCADE" })
   school: School;
 
   @Column()
@@ -39,4 +36,12 @@ export class Attendance {
 
   @Column({ nullable: true })
   remarks: string;
+
+  // Timestamps 
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

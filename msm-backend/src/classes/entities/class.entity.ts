@@ -4,12 +4,12 @@
 
 import { IsUUID } from "class-validator";
 import { School } from "src/schools/entities/school.entity";
+import { Teacher } from "src/teachers/entities/teacher.entity";
 import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
-    OneToMany,
     ManyToMany,
     JoinTable,
     CreateDateColumn,
@@ -22,8 +22,12 @@ export class Class {
     @IsUUID()
     id: string;
 
-    @ManyToOne(() => School)
+    @ManyToOne(() => School, (school) => school.classes, { onDelete: "CASCADE" })
     school: School;
+
+    @ManyToMany(() => Teacher, (teacher) => teacher.classes, { nullable: true })
+    @JoinTable()
+    teachers: Teacher[];
 
     @Column()
     name: string;
@@ -45,4 +49,12 @@ export class Class {
 
     @Column()
     academicYear: string;
+
+    // Timestamps 
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }
