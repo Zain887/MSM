@@ -49,8 +49,8 @@ export class CreateStudentDto {
         description: "Date of birth of the student",
         example: "2010-05-15",
     })
-    @IsDateString()
-    dob: Date;
+    @IsString()
+    dob: string;
 
     @ApiProperty({
         description: "Blood group of the student",
@@ -108,15 +108,15 @@ export class CreateStudentDto {
         description: "Date of enrollment",
         example: "2023-09-01",
     })
-    @IsDateString()
-    enrollmentDate: Date;
+    @IsString()
+    enrollmentDate: string;
 
     @ApiProperty({
         description: "Class ID to which the student belongs",
         example: "class-uuid-here",
     })
     @IsString()
-    classId: string;
+    classId: string | null  ;
 
     @ApiProperty({
         description: "Section name or identifier",
@@ -142,7 +142,7 @@ export class CreateStudentDto {
     })
     @IsOptional()
     @IsString()
-    hostelId?: string;
+    hostelId?: string | null;
 
     @ApiProperty({
         description: "Transport route ID if student uses school transport",
@@ -151,7 +151,7 @@ export class CreateStudentDto {
     })
     @IsOptional()
     @IsString()
-    transportRouteId?: string;
+    transportRouteId?: string | null;
 
     @ApiProperty({
         description: "Current status of the student",

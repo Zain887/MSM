@@ -21,6 +21,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from "typeorm";
 
 // =========================
@@ -28,6 +29,7 @@ import {
 // =========================
 
 @Entity("schools")
+@Unique(["registrationNumber"])
 export class School {
   @PrimaryGeneratedColumn("uuid")
   @IsUUID()
@@ -72,7 +74,11 @@ export class School {
   @Column({ type: "int", nullable: true })
   establishedYear: number;
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({
+    type: 'jsonb',
+    nullable: true,
+    default: () => `'{"gradingSystem":"A-F","currency":"PKR","language":"en"}'`
+  })
   settings: Record<string, any>;
 
   @Column({ type: "enum", enum: ["active", "inactive"], default: "active" })

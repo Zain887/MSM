@@ -83,7 +83,7 @@ export class Student {
     gender: string;
 
     @Column({ type: "date" })
-    dob: Date;
+    dob: string;
 
     @Column({ nullable: true })
     bloodGroup?: string;
@@ -104,7 +104,7 @@ export class Student {
     address: string;
 
     @Column({ type: "date" })
-    enrollmentDate: Date;
+    enrollmentDate: string;
 
     @Column()
     section: string;

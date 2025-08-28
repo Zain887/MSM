@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, IsUrl, IsInt } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, IsUrl, IsInt, IsObject } from 'class-validator';
 
 export class CreateSchoolDto {
   @ApiProperty({ example: 'Springfield High School' })
@@ -51,7 +51,7 @@ export class CreateSchoolDto {
   @IsUrl()
   websiteUrl?: string;
 
-  @ApiProperty({ required: false, example: 'https://placehold.co/200x200?text=Logo'})
+  @ApiProperty({ required: false, example: 'https://placehold.co/200x200?text=Logo' })
   @IsOptional()
   @IsUrl()
   logoUrl?: string;
@@ -61,9 +61,17 @@ export class CreateSchoolDto {
   @IsInt()
   establishedYear?: number;
 
-  @ApiProperty({ required: false, example: { gradingSystem: 'GPA', currency: 'PKR' } })
+  @ApiProperty({
+    required: false,
+    example: { gradingSystem: 'GPA', currency: 'PKR', language: 'en' }
+  })
   @IsOptional()
-  settings?: Record<string, any>;
+  @IsObject()
+  settings?: Record<string, any> = {
+    gradingSystem: 'GPA',
+    currency: 'PKR',
+    language: 'en'
+  };
 
   @ApiProperty({ required: false, enum: ['active', 'inactive'], default: 'active' })
   @IsOptional()
