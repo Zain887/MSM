@@ -24,46 +24,6 @@ export class Student {
     id: string;
 
     // =====================
-    // RELATIONS
-    // =====================
-
-    @ManyToOne(() => School, (school) => school.students, { onDelete: "CASCADE" })
-    @JoinColumn({ name: "schoolId" })
-    school: School;
-
-    @Column()
-    schoolId: string;
-
-    @ManyToOne(() => Class, (cls) => cls.students, { nullable: false, onDelete: "SET NULL" })
-    @JoinColumn({ name: "classId" })
-    class: Class;
-
-    @Column()
-    classId: string;
-
-    @ManyToMany(() => Parent)
-    @JoinTable({
-        name: "student_parents",
-        joinColumn: { name: "studentId", referencedColumnName: "id" },
-        inverseJoinColumn: { name: "parentId", referencedColumnName: "id" },
-    })
-    parents?: Parent[];
-
-    @ManyToOne(() => Hostel, (hostel) => hostel.students, { nullable: true, onDelete: "SET NULL" })
-    @JoinColumn({ name: "hostelId" })
-    hostel?: Hostel;
-
-    @Column({ nullable: true })
-    hostelId?: string;
-
-    @ManyToOne(() => TransportRoute, (route) => route.students, { nullable: true, onDelete: "SET NULL" })
-    @JoinColumn({ name: "transportRouteId" })
-    transportRoute?: TransportRoute;
-
-    @Column({ nullable: true })
-    transportRouteId?: string;
-
-    // =====================
     // COLUMNS
     // =====================
 
@@ -83,7 +43,7 @@ export class Student {
     gender: string;
 
     @Column({ type: "date" })
-    dob: string;
+    dob: Date;
 
     @Column({ nullable: true })
     bloodGroup?: string;
@@ -115,6 +75,47 @@ export class Student {
         default: "active",
     })
     status: string;
+
+    // =====================
+    // RELATIONS
+    // =====================
+
+    @ManyToOne(() => School, (school) => school.students, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "schoolId" })
+    school: School;
+
+    @Column()
+    @IsUUID()
+    schoolId: string;
+
+    @ManyToOne(() => Class, (cls) => cls.students, { nullable: false, onDelete: "SET NULL" })
+    @JoinColumn({ name: "classId" })
+    class?: Class;
+
+    @Column()
+    classId?: string;
+
+    @ManyToMany(() => Parent)
+    @JoinTable({
+        name: "student_parents",
+        joinColumn: { name: "studentId", referencedColumnName: "id" },
+        inverseJoinColumn: { name: "parentId", referencedColumnName: "id" },
+    })
+    parents?: Parent[];
+
+    @ManyToOne(() => Hostel, (hostel) => hostel.students, { nullable: true, onDelete: "SET NULL" })
+    @JoinColumn({ name: "hostelId" })
+    hostel?: Hostel;
+
+    @Column({ nullable: true })
+    hostelId?: string;
+
+    @ManyToOne(() => TransportRoute, (route) => route.students, { nullable: true, onDelete: "SET NULL" })
+    @JoinColumn({ name: "transportRouteId" })
+    transportRoute?: TransportRoute;
+
+    @Column({ nullable: true })
+    transportRouteId?: string;
 
     @CreateDateColumn()
     createdAt: Date;
